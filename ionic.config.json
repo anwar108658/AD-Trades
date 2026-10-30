@@ -1,0 +1,7 @@
+{
+  "name": "ad-trade",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
