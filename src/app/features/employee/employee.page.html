@@ -1,13 +1,193 @@
-<ion-header [translucent]="true">
+<ion-header class="page-header">
   <ion-toolbar>
-    <ion-title>employee</ion-title>
+    <ion-title>Employee management</ion-title>
+    <ion-button slot="end" class="add-button" color="primary">
+      <ion-icon slot="start" name="person-add-outline" aria-hidden="true"></ion-icon>
+      Add employee
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">employee</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <main class="employee-page">
+    <section class="page-intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">TEAM DIRECTORY</p>
+        <h1 id="page-title">Employees</h1>
+        <p class="page-description">View and manage your team in one place.</p>
+      </div>
+      <div class="directory-note">
+        <ion-icon name="people-outline" aria-hidden="true"></ion-icon>
+        <span>{{ employees.length }} team members</span>
+      </div>
+    </section>
+
+    <section class="summary-grid" aria-label="Employee overview">
+      <ion-card class="summary-card">
+        <ion-card-content>
+          <div class="summary-icon primary-icon">
+            <ion-icon name="people-outline" aria-hidden="true"></ion-icon>
+          </div>
+          <div>
+            <p>Total employees</p>
+            <strong>{{ employees.length }}</strong>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card class="summary-card">
+        <ion-card-content>
+          <div class="summary-icon success-icon">
+            <ion-icon name="checkmark-circle-outline" aria-hidden="true"></ion-icon>
+          </div>
+          <div>
+            <p>Active</p>
+            <strong>{{ activeEmployeeCount }}</strong>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card class="summary-card">
+        <ion-card-content>
+          <div class="summary-icon warning-icon">
+            <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+          </div>
+          <div>
+            <p>On leave</p>
+            <strong>{{ onLeaveEmployeeCount }}</strong>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card class="summary-card">
+        <ion-card-content>
+          <div class="summary-icon tertiary-icon">
+            <ion-icon name="briefcase-outline" aria-hidden="true"></ion-icon>
+          </div>
+          <div>
+            <p>Departments</p>
+            <strong>{{ departmentCount }}</strong>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </section>
+
+    <section class="directory-card" aria-label="Employee directory">
+      <div class="directory-toolbar">
+        <div>
+          <h2>All employees</h2>
+          <p>Browse your employee records</p>
+        </div>
+        <div class="filters">
+          <ion-searchbar
+            class="employee-search"
+            placeholder="Search employees"
+            aria-label="Search employees"
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="currentPage = 1"
+          ></ion-searchbar>
+          <ion-select
+            class="status-filter"
+            label="Status"
+            labelPlacement="stacked"
+            interface="popover"
+            [(ngModel)]="selectedStatus"
+            (ngModelChange)="currentPage = 1"
+            aria-label="Filter by employee status"
+          >
+            <ion-select-option value="all">All statuses</ion-select-option>
+            <ion-select-option value="Active">Active</ion-select-option>
+            <ion-select-option value="On leave">On leave</ion-select-option>
+            <ion-select-option value="Inactive">Inactive</ion-select-option>
+          </ion-select>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table class="employee-table">
+          <thead>
+            <tr>
+              <th scope="col">Employee</th>
+              <th scope="col">Employee ID</th>
+              <th scope="col">Role</th>
+              <th scope="col">Department</th>
+              <th scope="col">Contact</th>
+              <th scope="col">Join date</th>
+              <th scope="col">Status</th>
+              <th scope="col"><span class="visually-hidden">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (employee of paginatedEmployees; track employee.id) {
+            <tr>
+              <td>
+                <div class="employee-identity">
+                  <ion-avatar class="employee-avatar" [class]="'avatar-' + employee.avatarColor">
+                    <span>{{ employee.initials }}</span>
+                  </ion-avatar>
+                  <div class="employee-name">
+                    <strong>{{ employee.name }}</strong>
+                    <span>{{ employee.email }}</span>
+                  </div>
+                </div>
+              </td>
+              <td class="muted-cell">{{ employee.id }}</td>
+              <td>{{ employee.role }}</td>
+              <td>{{ employee.department }}</td>
+              <td class="muted-cell">{{ employee.phone }}</td>
+              <td class="muted-cell">{{ employee.joinDate }}</td>
+              <td>
+                <ion-badge
+                  class="status-badge"
+                  [color]="employee.status === 'Active' ? 'success' : employee.status === 'On leave' ? 'warning' : 'medium'"
+                >
+                  <span class="status-dot"></span>
+                  {{ employee.status }}
+                </ion-badge>
+              </td>
+              <td>
+                <ion-button fill="clear" class="row-action" [attr.aria-label]="'More actions for ' + employee.name">
+                  <ion-icon slot="icon-only" name="ellipsis-horizontal" aria-hidden="true"></ion-icon>
+                </ion-button>
+              </td>
+            </tr>
+            } @empty {
+            <tr>
+              <td class="empty-state" colspan="8">
+                <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+                <strong>No employees found</strong>
+                <span>Try changing your search or status filter.</span>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <footer class="table-footer">
+        <p>
+          Showing <strong>{{ visibleStart }}</strong>–<strong>{{ visibleEnd }}</strong> of
+          <strong>{{ filteredEmployees.length }}</strong> employees
+        </p>
+        <div class="pagination" aria-label="Table pagination">
+          <ion-button
+            fill="outline"
+            class="page-button"
+            aria-label="Previous page"
+            [disabled]="currentPage === 1"
+            (click)="previousPage()"
+          >
+            <ion-icon slot="icon-only" name="chevron-back-outline" aria-hidden="true"></ion-icon>
+          </ion-button>
+          <span>Page {{ currentPage }} of {{ totalPages }}</span>
+          <ion-button
+            fill="outline"
+            class="page-button"
+            aria-label="Next page"
+            [disabled]="currentPage === totalPages"
+            (click)="nextPage()"
+          >
+            <ion-icon slot="icon-only" name="chevron-forward-outline" aria-hidden="true"></ion-icon>
+          </ion-button>
+        </div>
+      </footer>
+    </section>
+  </main>
 </ion-content>
