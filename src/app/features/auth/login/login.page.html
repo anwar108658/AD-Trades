@@ -1,0 +1,57 @@
+<ion-content class="login-page" [fullscreen]="true">
+  <div class="login-layout">
+    <ion-card class="login-card">
+      <ion-card-header>
+        <div style="width: 120px; margin: 10px 0;">
+          <ion-img
+            [src]="isDarkMode() ? '../../../../assets/icon/dark.png' : '../../../../assets/icon/logo.png'"
+            style="width: 100%;"
+            alt="The Wisconsin State Capitol building in Madison, WI at night"
+          ></ion-img>
+        </div>
+        <ion-card-title color="success">Welcome back</ion-card-title>
+        <ion-card-subtitle  color="tertiary">Sign in to your Account</ion-card-subtitle>
+        <!-- <ion-toggle
+        [checked]="isDarkMode"
+    (ionChange)="toggleTheme($event.detail.checked)">
+  </ion-toggle> -->
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item class="login-field" lines="none">
+          <ion-input
+            label="Email address"
+            labelPlacement="stacked"
+            type="email"
+            inputmode="email"
+            autocomplete="email"
+            placeholder="you@gmail.com"
+            [(ngModel)]="email"
+          >
+          <ion-icon slot="start" name="mail-outline" aria-hidden="true"></ion-icon>
+        </ion-input>
+      </ion-item>
+      
+      <ion-item class="login-field" lines="none">
+        <ion-input
+            label="Password"
+            labelPlacement="stacked"
+            type="password" 
+            autocomplete="current-password"
+            placeholder="Enter your password"
+            [(ngModel)]="password"
+          >
+            <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true"></ion-icon>
+          </ion-input>
+        </ion-item>
+
+        <om-border-beam>
+        </om-border-beam>
+          <ion-button class="login-button" expand="block">LOG IN</ion-button>
+        <ion-label class="signup-prompt">
+          Don't have an account? <ion-text color="primary">Contact your administrator</ion-text>
+        </ion-label>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

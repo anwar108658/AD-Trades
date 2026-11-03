@@ -10,6 +10,73 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
+:root {
+	--ion-color-primary: #023250;
+	--ion-color-primary-rgb: 2,50,80;
+	--ion-color-primary-contrast: #ffffff;
+	--ion-color-primary-contrast-rgb: 255,255,255;
+	--ion-color-primary-shade: #022c46;
+	--ion-color-primary-tint: #1b4762;
+
+	--ion-color-secondary: #0e69aa;
+	--ion-color-secondary-rgb: 14,105,170;
+	--ion-color-secondary-contrast: #ffffff;
+	--ion-color-secondary-contrast-rgb: 255,255,255;
+	--ion-color-secondary-shade: #0c5c96;
+	--ion-color-secondary-tint: #2678b3;
+
+	--ion-color-tertiary: #412895;
+	--ion-color-tertiary-rgb: 65,40,149;
+	--ion-color-tertiary-contrast: #ffffff;
+	--ion-color-tertiary-contrast-rgb: 255,255,255;
+	--ion-color-tertiary-shade: #392383;
+	--ion-color-tertiary-tint: #543ea0;
+
+	--ion-color-success: #21913f;
+	--ion-color-success-rgb: 33,145,63;
+	--ion-color-success-contrast: #000000;
+	--ion-color-success-contrast-rgb: 0,0,0;
+	--ion-color-success-shade: #1d8037;
+	--ion-color-success-tint: #379c52;
+
+	--ion-color-warning: #c7a123;
+	--ion-color-warning-rgb: 199,161,35;
+	--ion-color-warning-contrast: #000000;
+	--ion-color-warning-contrast-rgb: 0,0,0;
+	--ion-color-warning-shade: #af8e1f;
+	--ion-color-warning-tint: #cdaa39;
+
+	--ion-color-danger: #aa0816;
+	--ion-color-danger-rgb: 170,8,22;
+	--ion-color-danger-contrast: #ffffff;
+	--ion-color-danger-contrast-rgb: 255,255,255;
+	--ion-color-danger-shade: #960713;
+	--ion-color-danger-tint: #b3212d;
+
+	--ion-color-light: #f6f8fc;
+	--ion-color-light-rgb: 246,248,252;
+	--ion-color-light-contrast: #000000;
+	--ion-color-light-contrast-rgb: 0,0,0;
+	--ion-color-light-shade: #d8dade;
+	--ion-color-light-tint: #f7f9fc;
+
+	--ion-color-medium: #4f4f4f;
+	--ion-color-medium-rgb: 79,79,79;
+	--ion-color-medium-contrast: #ffffff;
+	--ion-color-medium-contrast-rgb: 255,255,255;
+	--ion-color-medium-shade: #464646;
+	--ion-color-medium-tint: #616161;
+
+	--ion-color-dark: #2f2f2f;
+	--ion-color-dark-rgb: 47,47,47;
+	--ion-color-dark-contrast: #ffffff;
+	--ion-color-dark-contrast-rgb: 255,255,255;
+	--ion-color-dark-shade: #292929;
+	--ion-color-dark-tint: #444444;
+
+}
+
+
 @import "@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
@@ -31,7 +98,8 @@
  * For more info, please see:
  * https://ionicframework.com/docs/theming/dark-mode
  */
+ 
+//  @import "@ionic/angular/css/palettes/dark.always.css"; 
+ @import "@ionic/angular/css/palettes/dark.class.css"; 
+// @import '@ionic/angular/css/palettes/dark.system.css';
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';

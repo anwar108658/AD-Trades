@@ -1,0 +1,95 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.login-page {
+  --background: linear-gradient(
+    135deg,
+    #e8c968 0%,
+    #e9dcb9 34%,
+    #d3d9e5 57%,
+    #4875b8 100%
+  );
+}
+
+.login-layout {
+  box-sizing: border-box;
+  display: grid;
+  min-height: 100%;
+  place-items: center;
+  padding: 24px 16px;
+}
+
+:host-context(.ion-palette-dark) .login-page {
+  --background: linear-gradient(
+    135deg,
+    #685430 0%,
+    #685430 46%,
+    #35445a 54%,
+    #1e375c 100%
+  );
+}
+
+.login-card {
+  width: min(100%, 440px);
+  margin: 0;
+  padding: 28px 20px;
+  border-radius: 20px;
+  color: var(--ion-text-color);
+  box-shadow: 0 12px 36px rgba(20, 50, 75, 0.1);
+}
+.login-card ion-card-header,
+.login-card ion-card-content {
+  padding: 0;
+}
+
+.brand-icon {
+  margin-bottom: 20px;
+  color: var(--ion-color-primary);
+  font-size: 2rem;
+}
+
+.login-card ion-card-title {
+  color: var(--ion-color-secondary);
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.login-card ion-card-subtitle {
+  margin-top: 8px;
+  color: var(--ion-color-medium);
+}
+
+.login-card ion-card-content {
+  padding-top: 26px;
+}
+
+.login-field {
+  margin-bottom: 14px;
+  border-radius: 10px;
+  --background: var(--ion-item-background, var(--ion-background-color));
+  --color: var(--ion-text-color);
+  --padding-start: 14px;
+  --inner-padding-end: 14px;
+}
+
+.login-field ion-input {
+  --color: var(--ion-text-color);
+  --placeholder-color: var(--ion-color-medium);
+}
+
+.login-button {
+  height: 48px;
+  margin: 22px 0 18px;
+  font-weight: 600;
+  text-transform: none;
+  --border-radius: 10px;
+}
+
+.signup-prompt {
+  display: block;
+  color: var(--ion-color-medium);
+  font-size: 0.85rem;
+  text-align: center;
+}
