@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss'],
+  selector: 'app-employee',
+  templateUrl: './employee.page.html',
+  styleUrls: ['./employee.page.scss'],
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule],
 })
-export class ProfilePage implements OnInit {
+export class EmployeePage implements OnInit {
   constructor() {}
 
   ngOnInit() {}

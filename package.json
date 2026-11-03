@@ -32,8 +32,6 @@
     "@capacitor/keyboard": "8.0.6",
     "@capacitor/status-bar": "8.0.4",
     "@ionic/angular": "^9.0.0",
-    "@omnedia/ngx-border-beam": "^4.0.1",
-    "@omnedia/ngx-neon-underline": "^4.0.1",
     "@tailwindcss/postcss": "^4.3.4",
     "ionicons": "^8.1.0",
     "postcss": "^8.5.32",
