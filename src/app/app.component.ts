@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { eye, lockClosed, lockClosedOutline, mailOutline } from 'ionicons/icons';
+import { ThemeService } from './core/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,8 @@ import { eye, lockClosed, lockClosedOutline, mailOutline } from 'ionicons/icons'
   imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
-   constructor() {
+  constructor() {
+    inject(ThemeService);
     addIcons({ eye, lockClosedOutline, mailOutline });
   }
 }

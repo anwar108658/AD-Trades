@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonIcon, IonInput, IonItem, IonLabel, IonText, IonImg, IonToggle } from '@ionic/angular';
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonIcon, IonInput, IonItem, IonLabel, IonText, IonImg } from '@ionic/angular';
+import { ThemeService } from '../../../core/theme.service';
 
 @Component({
   selector: 'app-login',
@@ -27,20 +28,14 @@ export class LoginPage {
   email = '';
   password = '';
 
-  isDarkMode = signal(true);
+  constructor(private readonly themeService: ThemeService) {}
+
+  isDarkMode(): boolean {
+    return this.themeService.isDark();
+  }
 
   toggleTheme(isDark: boolean) {
-    this.isDarkMode.set(isDark);
-
-    document.documentElement.classList.toggle(
-      'ion-palette-dark',
-      isDark
-    );
-  }
-
-  ngOnInit() {
-    this.toggleTheme(this.isDarkMode());
+    this.themeService.setTheme(isDark ? 'dark' : 'light');
   }
 }
-
 

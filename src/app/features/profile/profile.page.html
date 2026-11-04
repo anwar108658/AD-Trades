@@ -1,0 +1,134 @@
+<ion-header class="profile-header">
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="profile-content" [fullscreen]="true">
+  <main class="profile-page">
+    <ion-card class="identity-card">
+      <ion-card-content>
+        <ion-item class="identity-item" lines="none">
+          <ion-avatar slot="start" class="profile-avatar">
+            <span>{{ initials }}</span>
+          </ion-avatar>
+          <ion-label>
+            <h1>{{ name }}</h1>
+            <p>Personal account</p>
+          </ion-label>
+          <ion-badge class="role-badge">
+            <ion-icon name="shield-checkmark-outline" aria-hidden="true"></ion-icon>
+            {{ role }}
+          </ion-badge>
+        </ion-item>
+
+        <ion-list class="contact-list" lines="none">
+          <ion-item [href]="'tel:' + phone">
+            <ion-icon slot="start" name="call-outline" aria-hidden="true"></ion-icon>
+            <ion-label>
+              <p>Phone</p>
+              <h2>{{ phone }}</h2>
+            </ion-label>
+          </ion-item>
+          <ion-item [href]="'mailto:' + email">
+            <ion-icon slot="start" name="mail-outline" aria-hidden="true"></ion-icon>
+            <ion-label>
+              <p>Email</p>
+              <h2>{{ email }}</h2>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="settings-card">
+      <ion-card-header>
+        <ion-card-title>Account settings</ion-card-title>
+        <ion-card-subtitle>Manage your account and preferences</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-list class="settings-list" lines="inset">
+        <ion-item button detail="true">
+          <ion-icon slot="start" name="create-outline" aria-hidden="true"></ion-icon>
+          <ion-label>
+            <h2>Edit profile</h2>
+            <p>Update your personal information</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item button detail="true">
+          <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true"></ion-icon>
+          <ion-label>
+            <h2>Change password</h2>
+            <p>Keep your account secure</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item class="theme-item">
+          <ion-icon slot="start" name="color-palette-outline" aria-hidden="true"></ion-icon>
+          <ion-label>
+            <h2>Theme</h2>
+            <p>Choose your appearance</p>
+          </ion-label>
+          <ion-select
+            slot="end"
+            [ngModel]="selectedTheme"
+            (ngModelChange)="applyTheme($event)"
+            interface="popover"
+            aria-label="Choose theme"
+          >
+            <ion-select-option value="light">Light</ion-select-option>
+            <ion-select-option value="dark">Dark</ion-select-option>
+            <ion-select-option value="system">System</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon slot="start" name="sync-outline" aria-hidden="true"></ion-icon>
+          <ion-label>
+            <h2>Sync status</h2>
+            <p>Last synced {{ lastSynced }}</p>
+          </ion-label>
+          <ion-badge slot="end" class="sync-badge">Up to date</ion-badge>
+        </ion-item>
+
+        @if (isAdmin) {
+          <ion-item button detail="true" routerLink="/employee">
+            <ion-icon slot="start" name="people-outline" aria-hidden="true"></ion-icon>
+            <ion-label>
+              <h2>Employee</h2>
+              <p>Manage your team</p>
+            </ion-label>
+          </ion-item>
+        }
+
+        <ion-item button detail="true">
+          <ion-icon slot="start" name="information-circle-outline" aria-hidden="true"></ion-icon>
+          <ion-label>
+            <h2>About</h2>
+            <p>AD Trades · Version 1.0</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+
+    <ion-button
+      class="logout-button"
+      expand="block"
+      fill="outline"
+      color="danger"
+      (click)="isLogoutAlertOpen = true"
+    >
+      <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>
+      Log out
+    </ion-button>
+  </main>
+
+  <ion-alert
+    [isOpen]="isLogoutAlertOpen"
+    header="Log out?"
+    message="Are you sure you want to log out of your account?"
+    [buttons]="logoutAlertButtons"
+    (didDismiss)="isLogoutAlertOpen = false"
+  ></ion-alert>
+</ion-content>

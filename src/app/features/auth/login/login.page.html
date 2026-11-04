@@ -2,19 +2,16 @@
   <div class="login-layout">
     <ion-card class="login-card">
       <ion-card-header>
+        <ion-card-subtitle color="tertiary">Sign in to manage your installment business</ion-card-subtitle>
+        <ion-card-title color="success">Welcome Back !</ion-card-title>
         <div style="width: 120px; margin: 10px 0;">
           <ion-img
+            slot="end"
             [src]="isDarkMode() ? '../../../../assets/icon/dark.png' : '../../../../assets/icon/logo.png'"
             style="width: 100%;"
             alt="The Wisconsin State Capitol building in Madison, WI at night"
           ></ion-img>
         </div>
-        <ion-card-title color="success">Welcome Back !</ion-card-title>
-        <ion-card-subtitle  color="tertiary">Sign in to manage your installment business</ion-card-subtitle>
-        <!-- <ion-toggle
-        [checked]="isDarkMode"
-    (ionChange)="toggleTheme($event.detail.checked)">
-  </ion-toggle> -->
       </ion-card-header>
 
       <ion-card-content>
