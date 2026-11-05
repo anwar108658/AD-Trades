@@ -1,16 +1,49 @@
 <ion-tabs>
   <ion-tab-bar class="bottom-nav">
-    <ion-tab-button  routerLink="/dashboard">
-      <ion-icon name="home-outline"></ion-icon><ion-label>Dashboard</ion-label>
+    <ion-tab-button
+      tab="dashboard"
+      routerLink="/dashboard"
+      routerLinkActive="tab-selected"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <ion-icon name="home" aria-hidden="true"></ion-icon>
+      <ion-label>Dashboard</ion-label>
     </ion-tab-button>
-    <ion-tab-button  routerLink="/customers">
-      <ion-icon name="people-outline"></ion-icon><ion-label>Customers</ion-label>
+    <ion-tab-button
+      tab="sales"
+      routerLink="/sales"
+      routerLinkActive="tab-selected"
+      [routerLinkActiveOptions]="{ exact: true }"
+    > 
+      <ion-icon name="analytics-outline" aria-hidden="true"></ion-icon>
+      <ion-label>Sales</ion-label>
     </ion-tab-button>
-    <ion-tab-button  routerLink="/recovery">
-      <ion-icon name="calendar-outline"></ion-icon><ion-label>Recovery</ion-label>
+    <ion-tab-button
+      tab="customers"
+      routerLink="/customers"
+      routerLinkActive="tab-selected"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <ion-icon name="people" aria-hidden="true"></ion-icon>
+      <ion-label>Customers</ion-label>
     </ion-tab-button>
-    <ion-tab-button routerLink="/profile">
-      <ion-icon name="person-outline"></ion-icon><ion-label>Profile</ion-label>
+    <ion-tab-button
+      tab="recovery"
+      routerLink="/recovery"
+      routerLinkActive="tab-selected"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <ion-icon name="calendar" aria-hidden="true"></ion-icon>
+      <ion-label>Recovery</ion-label>
+    </ion-tab-button>
+    <ion-tab-button
+      tab="profile"
+      routerLink="/profile"
+      routerLinkActive="tab-selected"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <ion-icon name="person" aria-hidden="true"></ion-icon>
+      <ion-label>Profile</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

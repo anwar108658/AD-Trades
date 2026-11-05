@@ -69,11 +69,11 @@
 }
 
 .login-button {
-  height: 48px;
+  height: 38px !important;
   margin: 22px 0 18px;
   font-weight: 600;
   text-transform: none;
-  --border-radius: 10px;
+  --border-radius: 5px;
 }
 
 .signup-prompt {
