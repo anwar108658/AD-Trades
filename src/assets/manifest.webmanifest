@@ -1,0 +1,18 @@
+{
+  "name": "AD Trades",
+  "short_name": "AD Trades",
+  "description": "Abdur Rehman Traders business workspace",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f3f5f4",
+  "theme_color": "#32766b",
+  "icons": [
+    {
+      "src": "icon/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
