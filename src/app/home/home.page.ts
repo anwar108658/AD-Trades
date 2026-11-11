@@ -8,10 +8,13 @@ import { addIcons } from 'ionicons';
 import {
   analyticsOutline,
   apps,
+  arrowBackCircle,
   calendar,
+  chevronBackOutline,
   home,
   people,
-  person
+  person,
+  textOutline
 } from 'ionicons/icons';
 
 interface TabItem {
@@ -107,7 +110,8 @@ export class HomePage {
       people,
       calendar,
       person,
-      apps
+      apps,
+      textOutline
     });
   }
 }

@@ -31,6 +31,7 @@
 
 .login-card ion-card-header {
   flex-direction: column;
+  align-items: center;
 }
 
 .brand-icon {
@@ -40,12 +41,13 @@
 }
 
 .login-card ion-card-title {
-  color: var(--ion-color-secondary);
+  color: var(--ion-color-success);
   font-size: 1.6rem;
   font-weight: 700;
 }
 
 .login-card ion-card-subtitle {
+  text-align: center;
   margin-top: 8px;
   color: var(--ion-color-medium);
 }

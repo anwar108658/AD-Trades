@@ -34,7 +34,7 @@ export const routes: Routes = [
   },
   {
     path: 'sales',
-    loadComponent: () => import('./featurea/sales/sales.page').then((m) => m.SalesPage),
+    loadComponent: () => import('./features/sales/sales.page').then((m) => m.SalesPage),
   },
   {
     path: 'recovery',

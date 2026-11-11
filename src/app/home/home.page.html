@@ -34,12 +34,15 @@
           @for (item of navigationItems(); track item.id) {
             <ion-button
               class="navigation-grid-button"
-              fill="outline"
+              fill="clear"
+              color="medium"
               [routerLink]="item.route"
               (click)="navigationModal.dismiss()"
             >
-              <ion-icon style="margin-right: 8px;" [name]="item.icon" aria-hidden="true"></ion-icon>
-              <ion-label>{{ item.label }}</ion-label>
+              <div class="navigation-grid-button-content">
+                <ion-icon style="margin-right: 8px;" [name]="item.icon" aria-hidden="true"></ion-icon>
+                <ion-label>{{ item.label }}</ion-label>
+              </div>
             </ion-button>
           }
         </div>
