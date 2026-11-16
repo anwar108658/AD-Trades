@@ -2,7 +2,9 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   IonAvatar,
+  IonBackButton,
   IonButton,
+  IonButtons,
   IonContent,
   IonHeader,
   IonIcon,
@@ -36,7 +38,9 @@ interface Employee {
     FormsModule,
     ReactiveFormsModule,
     IonAvatar,
+    IonBackButton,
     IonButton,
+    IonButtons,
     IonContent,
     IonHeader,
     IonIcon,

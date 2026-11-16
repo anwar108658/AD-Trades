@@ -1,5 +1,14 @@
 <ion-header class="page-header">
   <ion-toolbar class="app-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button
+        class="app-back-button"
+        defaultHref="/home/profile"
+        color="tertiary"
+        text="🔙 Previous"
+        [icon]="false"
+      ></ion-back-button>
+    </ion-buttons>
     <ion-title>Employees</ion-title>
     <ion-button slot="end" class="add-button app-button" color="primary" (click)="openAddModal()">
       <ion-icon slot="start" name="person-add-outline" aria-hidden="true"></ion-icon>
