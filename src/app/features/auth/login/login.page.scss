@@ -65,17 +65,9 @@
   --inner-padding-end: 14px;
 }
 
-.login-field ion-input {
-  --color: var(--ion-text-color);
-  --placeholder-color: var(--ion-color-medium);
-}
-
 .login-button {
   height: 38px !important;
   margin: 22px 0 18px;
-  font-weight: 600;
-  text-transform: none;
-  --border-radius: 5px;
 }
 
 .signup-prompt {

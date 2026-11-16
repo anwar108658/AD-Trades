@@ -1,20 +1,20 @@
 <ion-header class="page-header">
-  <ion-toolbar>
+  <ion-toolbar class="app-toolbar">
     <ion-title>Employees</ion-title>
-    <ion-button slot="end" class="add-button" color="primary" (click)="openAddModal()">
+    <ion-button slot="end" class="add-button app-button" color="primary" (click)="openAddModal()">
       <ion-icon slot="start" name="person-add-outline" aria-hidden="true"></ion-icon>
       Add employee
     </ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <main class="employee-page">
+<ion-content class="app-page-content" [fullscreen]="true">
+  <main class="employee-page app-page-shell app-page-shell--wide">
     <section class="page-intro" aria-labelledby="page-title">
       <div>
-        <p class="eyebrow">YOUR TEAM</p>
+        <p class="app-eyebrow">YOUR TEAM</p>
         <h1 id="page-title">Employees</h1>
-        <p class="page-description">Find a team member or add someone new.</p>
+        <p class="app-description">Find a team member or add someone new.</p>
       </div>
       <span class="team-count">
         <ion-icon name="people-outline" aria-hidden="true"></ion-icon>
@@ -22,7 +22,7 @@
       </span>
     </section>
 
-    <section class="directory-card" aria-label="Employee directory">
+    <section class="directory-card app-surface-card" aria-label="Employee directory">
       <div class="directory-toolbar">
         <div>
           <h2>Team directory</h2>
@@ -64,16 +64,22 @@
   </main>
 
   <ion-modal
-    class="employee-modal"
+    class="app-modal app-modal--form"
     [isOpen]="isAddModalOpen"
     [backdropDismiss]="false"
     (didDismiss)="onAddModalDismiss()"
   >
     <ng-template>
       <ion-header>
-        <ion-toolbar>
+        <ion-toolbar class="app-toolbar">
           <ion-title>Add employee</ion-title>
-          <ion-button slot="end" fill="clear" aria-label="Close" (click)="closeAddModal()">
+          <ion-button
+            slot="end"
+            class="modal-close-button"
+            fill="clear"
+            aria-label="Close"
+            (click)="closeAddModal()"
+          >
             <ion-icon slot="icon-only" name="close-outline" aria-hidden="true"></ion-icon>
           </ion-button>
         </ion-toolbar>
@@ -92,6 +98,7 @@
 
           <div class="form-field">
             <ion-input
+              class="app-input app-input--outlined"
               label="Full name"
               labelPlacement="floating"
               fill="outline"
@@ -111,6 +118,7 @@
 
           <div class="form-field">
             <ion-input
+              class="app-input app-input--outlined"
               label="Email address"
               labelPlacement="floating"
               fill="outline"
@@ -129,6 +137,7 @@
 
           <div class="form-field">
             <ion-input
+              class="app-input app-input--outlined"
               label="Password"
               labelPlacement="floating"
               fill="outline"
@@ -147,6 +156,7 @@
 
           <div class="form-field">
             <ion-input
+              class="app-input app-input--outlined"
               label="Phone number"
               labelPlacement="floating"
               fill="outline"
@@ -166,6 +176,7 @@
 
           <div class="form-field">
             <ion-input
+              class="app-input app-input--outlined"
               label="CNIC"
               labelPlacement="floating"
               fill="outline"
@@ -182,10 +193,10 @@
           </div>
 
           <div class="form-actions">
-            <ion-button fill="outline" type="button" class="cancel-button" (click)="closeAddModal()">
+            <ion-button fill="outline" type="button" class="cancel-button app-button" (click)="closeAddModal()">
               Cancel
             </ion-button>
-            <ion-button type="submit" class="submit-button"> Add employee </ion-button>
+            <ion-button type="submit" class="submit-button app-button"> Add employee </ion-button>
           </div>
         </form>
       </ion-content>

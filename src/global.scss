@@ -23,21 +23,112 @@
 
 @import "@ionic/angular/css/palettes/dark.class.css";
 
-ion-modal.employee-modal {
+.app-page-content {
+  --background: var(--app-page-background);
+  color: var(--app-text);
+}
+
+.app-page-shell {
+  box-sizing: border-box;
+  width: min(100%, 720px);
+  margin: 0 auto;
+  padding: 32px 22px calc(96px + env(safe-area-inset-bottom));
+}
+
+.app-page-shell--wide {
+  width: min(100%, 760px);
+}
+
+.app-toolbar {
+  --background: var(--app-surface);
+  --border-color: var(--app-border);
+  --min-height: 60px;
+}
+
+.app-toolbar ion-title {
+  color: var(--app-text);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.app-surface-card {
+  margin: 0;
+  border: 1px solid var(--app-border);
+  border-radius: 16px;
+  background: var(--app-surface);
+  box-shadow: var(--app-card-shadow);
+}
+
+.app-eyebrow {
+  margin: 0 0 8px;
+  color: var(--app-accent);
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+}
+
+.app-description {
+  margin: 6px 0 0;
+  color: var(--app-muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.app-button {
+  font-weight: 650;
+  text-transform: none;
+  --border-radius: 10px;
+  --box-shadow: none;
+}
+
+.app-modal--form {
+  --width: min(100%, 540px);
+  --height: min(760px, 92%);
+  --border-radius: 20px;
+}
+
+.app-input {
+  --color: var(--app-text);
+  --highlight-color-focused: var(--app-accent);
+  --placeholder-color: var(--app-muted);
+  --placeholder-opacity: 0.68;
+}
+
+.app-input--outlined {
+  --background: var(--app-accent-soft);
+  --border-color: var(--app-border);
+  --border-radius: 9px;
+  --border-style: solid;
+  --border-width: 1px;
+  --padding-bottom: 11px;
+  --padding-end: 12px;
+  --padding-start: 12px;
+  --padding-top: 11px;
+}
+
+ion-modal.app-modal {
   --background: var(--app-surface, #ffffff);
   --backdrop-opacity: 0.42;
 }
 
-ion-modal.employee-modal::part(content) {
+ion-modal.app-modal::part(content) {
   background: var(--app-surface, #ffffff);
 }
 
-ion-modal.employee-modal ion-header,
-ion-modal.employee-modal ion-toolbar {
+ion-modal.app-modal ion-header,
+ion-modal.app-modal ion-toolbar {
   --background: var(--app-surface, #ffffff);
   background: var(--app-surface, #ffffff);
 }
 
-ion-modal.employee-modal ion-toolbar::part(container) {
+ion-modal.app-modal ion-toolbar::part(container) {
   background: var(--app-surface, #ffffff);
+}
+
+@media (max-width: 560px) {
+  ion-modal.app-modal--form {
+    --height: 92%;
+    --border-radius: 18px 18px 0 0;
+    align-items: flex-end;
+  }
 }

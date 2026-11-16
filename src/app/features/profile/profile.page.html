@@ -1,12 +1,12 @@
 <ion-header class="profile-header">
-  <ion-toolbar>
+  <ion-toolbar class="app-toolbar">
     <ion-title>Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="profile-content" [fullscreen]="true">
-  <main class="profile-page">
-    <ion-card class="identity-card">
+<ion-content class="profile-content app-page-content" [fullscreen]="true">
+  <main class="profile-page app-page-shell">
+    <ion-card class="identity-card app-surface-card">
       <ion-card-content>
         <ion-item class="identity-item" lines="none">
           <ion-avatar slot="start" class="profile-avatar">
@@ -41,7 +41,7 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-card class="settings-card">
+    <ion-card class="settings-card app-surface-card">
       <ion-card-header>
         <ion-card-title>Account settings</ion-card-title>
         <ion-card-subtitle>Manage your account and preferences</ion-card-subtitle>
@@ -113,7 +113,7 @@
     </ion-card>
 
     <ion-button
-      class="logout-button"
+      class="logout-button app-button"
       expand="block"
       fill="outline"
       color="danger"
