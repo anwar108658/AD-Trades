@@ -1,7 +1,7 @@
 <ion-header class="page-header">
   <ion-toolbar>
-    <ion-title>Employee management</ion-title>
-    <ion-button slot="end" class="add-button" color="primary">
+    <ion-title>Employees</ion-title>
+    <ion-button slot="end" class="add-button" color="primary" (click)="openAddModal()">
       <ion-icon slot="start" name="person-add-outline" aria-hidden="true"></ion-icon>
       Add employee
     </ion-button>
@@ -12,182 +12,191 @@
   <main class="employee-page">
     <section class="page-intro" aria-labelledby="page-title">
       <div>
-        <p class="eyebrow">TEAM DIRECTORY</p>
+        <p class="eyebrow">YOUR TEAM</p>
         <h1 id="page-title">Employees</h1>
-        <p class="page-description">View and manage your team in one place.</p>
+        <p class="page-description">Find a team member or add someone new.</p>
       </div>
-      <div class="directory-note">
+      <span class="team-count">
         <ion-icon name="people-outline" aria-hidden="true"></ion-icon>
-        <span>{{ employees.length }} team members</span>
-      </div>
-    </section>
-
-    <section class="summary-grid" aria-label="Employee overview">
-      <ion-card class="summary-card">
-        <ion-card-content>
-          <div class="summary-icon primary-icon">
-            <ion-icon name="people-outline" aria-hidden="true"></ion-icon>
-          </div>
-          <div>
-            <p>Total employees</p>
-            <strong>{{ employees.length }}</strong>
-          </div>
-        </ion-card-content>
-      </ion-card>
-      <ion-card class="summary-card">
-        <ion-card-content>
-          <div class="summary-icon success-icon">
-            <ion-icon name="checkmark-circle-outline" aria-hidden="true"></ion-icon>
-          </div>
-          <div>
-            <p>Active</p>
-            <strong>{{ activeEmployeeCount }}</strong>
-          </div>
-        </ion-card-content>
-      </ion-card>
-      <ion-card class="summary-card">
-        <ion-card-content>
-          <div class="summary-icon warning-icon">
-            <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-          </div>
-          <div>
-            <p>On leave</p>
-            <strong>{{ onLeaveEmployeeCount }}</strong>
-          </div>
-        </ion-card-content>
-      </ion-card>
-      <ion-card class="summary-card">
-        <ion-card-content>
-          <div class="summary-icon tertiary-icon">
-            <ion-icon name="briefcase-outline" aria-hidden="true"></ion-icon>
-          </div>
-          <div>
-            <p>Departments</p>
-            <strong>{{ departmentCount }}</strong>
-          </div>
-        </ion-card-content>
-      </ion-card>
+        {{ employees.length }} {{ employees.length === 1 ? 'employee' : 'employees' }}
+      </span>
     </section>
 
     <section class="directory-card" aria-label="Employee directory">
       <div class="directory-toolbar">
         <div>
-          <h2>All employees</h2>
-          <p>Browse your employee records</p>
+          <h2>Team directory</h2>
+          <p>Search by name, email, or phone</p>
         </div>
-        <div class="filters">
-          <ion-searchbar
-            class="employee-search"
-            placeholder="Search employees"
-            aria-label="Search employees"
-            [(ngModel)]="searchTerm"
-            (ngModelChange)="currentPage = 1"
-          ></ion-searchbar>
-          <ion-select
-            class="status-filter"
-            label="Status"
-            labelPlacement="stacked"
-            interface="popover"
-            [(ngModel)]="selectedStatus"
-            (ngModelChange)="currentPage = 1"
-            aria-label="Filter by employee status"
-          >
-            <ion-select-option value="all">All statuses</ion-select-option>
-            <ion-select-option value="Active">Active</ion-select-option>
-            <ion-select-option value="On leave">On leave</ion-select-option>
-            <ion-select-option value="Inactive">Inactive</ion-select-option>
-          </ion-select>
-        </div>
+        <ion-searchbar
+          class="employee-search"
+          placeholder="Search employees"
+          aria-label="Search employees"
+          [debounce]="150"
+          [(ngModel)]="searchTerm"
+        ></ion-searchbar>
       </div>
 
-      <div class="table-scroll">
-        <table class="employee-table">
-          <thead>
-            <tr>
-              <th scope="col">Employee</th>
-              <th scope="col">Employee ID</th>
-              <th scope="col">Role</th>
-              <th scope="col">Department</th>
-              <th scope="col">Contact</th>
-              <th scope="col">Join date</th>
-              <th scope="col">Status</th>
-              <th scope="col"><span class="visually-hidden">Actions</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (employee of paginatedEmployees; track employee.id) {
-            <tr>
-              <td>
-                <div class="employee-identity">
-                  <ion-avatar class="employee-avatar" [class]="'avatar-' + employee.avatarColor">
-                    <span>{{ employee.initials }}</span>
-                  </ion-avatar>
-                  <div class="employee-name">
-                    <strong>{{ employee.name }}</strong>
-                    <span>{{ employee.email }}</span>
-                  </div>
-                </div>
-              </td>
-              <td class="muted-cell">{{ employee.id }}</td>
-              <td>{{ employee.role }}</td>
-              <td>{{ employee.department }}</td>
-              <td class="muted-cell">{{ employee.phone }}</td>
-              <td class="muted-cell">{{ employee.joinDate }}</td>
-              <td>
-                <ion-badge
-                  class="status-badge"
-                  [color]="employee.status === 'Active' ? 'success' : employee.status === 'On leave' ? 'warning' : 'medium'"
-                >
-                  <span class="status-dot"></span>
-                  {{ employee.status }}
-                </ion-badge>
-              </td>
-              <td>
-                <ion-button fill="clear" class="row-action" [attr.aria-label]="'More actions for ' + employee.name">
-                  <ion-icon slot="icon-only" name="ellipsis-horizontal" aria-hidden="true"></ion-icon>
-                </ion-button>
-              </td>
-            </tr>
-            } @empty {
-            <tr>
-              <td class="empty-state" colspan="8">
-                <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
-                <strong>No employees found</strong>
-                <span>Try changing your search or status filter.</span>
-              </td>
-            </tr>
-            }
-          </tbody>
-        </table>
-      </div>
-
-      <footer class="table-footer">
-        <p>
-          Showing <strong>{{ visibleStart }}</strong>–<strong>{{ visibleEnd }}</strong> of
-          <strong>{{ filteredEmployees.length }}</strong> employees
-        </p>
-        <div class="pagination" aria-label="Table pagination">
-          <ion-button
-            fill="outline"
-            class="page-button"
-            aria-label="Previous page"
-            [disabled]="currentPage === 1"
-            (click)="previousPage()"
-          >
-            <ion-icon slot="icon-only" name="chevron-back-outline" aria-hidden="true"></ion-icon>
-          </ion-button>
-          <span>Page {{ currentPage }} of {{ totalPages }}</span>
-          <ion-button
-            fill="outline"
-            class="page-button"
-            aria-label="Next page"
-            [disabled]="currentPage === totalPages"
-            (click)="nextPage()"
-          >
-            <ion-icon slot="icon-only" name="chevron-forward-outline" aria-hidden="true"></ion-icon>
-          </ion-button>
+      <ion-list class="employee-list" lines="none">
+        @for (employee of filteredEmployees; track employee.id) {
+        <ion-item class="employee-item">
+          <ion-avatar slot="start" class="employee-avatar">
+            <span>{{ employee.initials }}</span>
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ employee.name }}</h2>
+            <p>{{ employee.email }}</p>
+          </ion-label>
+          <div class="employee-phone">
+            <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+            <span>{{ employee.phone }}</span>
+          </div>
+        </ion-item>
+        } @empty {
+        <div class="empty-state">
+          <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+          <strong>No employees found</strong>
+          <span>Try a different search, or add a new employee.</span>
         </div>
-      </footer>
+        }
+      </ion-list>
     </section>
   </main>
+
+  <ion-modal
+    class="employee-modal"
+    [isOpen]="isAddModalOpen"
+    [backdropDismiss]="false"
+    (didDismiss)="onAddModalDismiss()"
+  >
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Add employee</ion-title>
+          <ion-button slot="end" fill="clear" aria-label="Close" (click)="closeAddModal()">
+            <ion-icon slot="icon-only" name="close-outline" aria-hidden="true"></ion-icon>
+          </ion-button>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="modal-content">
+        <form class="employee-form" [formGroup]="form" (ngSubmit)="addEmployee()">
+          <div class="form-intro">
+            <div class="form-icon">
+              <ion-icon name="person-add-outline" aria-hidden="true"></ion-icon>
+            </div>
+            <div>
+              <h2>Employee details</h2>
+              <p>Enter the new team member’s information.</p>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <ion-input
+              label="Full name"
+              labelPlacement="floating"
+              fill="outline"
+              placeholder="e.g. Alex Morgan"
+              formControlName="fullName"
+              autocomplete="name"
+              [attr.aria-invalid]="form.controls.fullName.invalid && form.controls.fullName.touched"
+            ></ion-input>
+            @if (form.controls.fullName.touched && form.controls.fullName.hasError('required')) {
+            <ion-note color="danger">Full name is required.</ion-note>
+            } @else if (form.controls.fullName.touched && form.controls.fullName.hasError('minlength')) {
+            <ion-note color="danger">Name must be at least 2 characters.</ion-note>
+            } @else if (form.controls.fullName.touched && form.controls.fullName.hasError('maxlength')) {
+            <ion-note color="danger">Name cannot exceed 100 characters.</ion-note>
+            }
+          </div>
+
+          <div class="form-field">
+            <ion-input
+              label="Email address"
+              labelPlacement="floating"
+              fill="outline"
+              type="email"
+              placeholder="name@example.com"
+              formControlName="email"
+              autocomplete="email"
+              [attr.aria-invalid]="form.controls.email.invalid && form.controls.email.touched"
+            ></ion-input>
+            @if (form.controls.email.touched && form.controls.email.hasError('required')) {
+            <ion-note color="danger">Email address is required.</ion-note>
+            } @else if (form.controls.email.touched && form.controls.email.hasError('email')) {
+            <ion-note color="danger">Enter a valid email address.</ion-note>
+            }
+          </div>
+
+          <div class="form-field">
+            <ion-input
+              label="Password"
+              labelPlacement="floating"
+              fill="outline"
+              type="password"
+              placeholder="At least 8 characters"
+              formControlName="password"
+              autocomplete="new-password"
+              [attr.aria-invalid]="form.controls.password.invalid && form.controls.password.touched"
+            ></ion-input>
+            @if (form.controls.password.touched && form.controls.password.hasError('required')) {
+            <ion-note color="danger">Password is required.</ion-note>
+            } @else if (form.controls.password.touched && form.controls.password.hasError('minlength')) {
+            <ion-note color="danger">Password must be at least 8 characters.</ion-note>
+            }
+          </div>
+
+          <div class="form-field">
+            <ion-input
+              label="Phone number"
+              labelPlacement="floating"
+              fill="outline"
+              type="tel"
+              placeholder="e.g. +92 300 1234567"
+              formControlName="phone"
+              autocomplete="tel"
+              [attr.aria-invalid]="form.controls.phone.invalid && form.controls.phone.touched"
+            ></ion-input>
+            @if (form.controls.phone.touched && form.controls.phone.hasError('required')) {
+            <ion-note color="danger">Phone number is required.</ion-note>
+            } @else if (form.controls.phone.touched && (form.controls.phone.hasError('minlength') ||
+            form.controls.phone.hasError('maxlength'))) {
+            <ion-note color="danger">Phone number must be 7 to 15 characters.</ion-note>
+            }
+          </div>
+
+          <div class="form-field">
+            <ion-input
+              label="CNIC"
+              labelPlacement="floating"
+              fill="outline"
+              placeholder="12345-1234567-1"
+              formControlName="cnic"
+              autocomplete="off"
+              [attr.aria-invalid]="form.controls.cnic.invalid && form.controls.cnic.touched"
+            ></ion-input>
+            @if (form.controls.cnic.touched && form.controls.cnic.hasError('required')) {
+            <ion-note color="danger">CNIC is required.</ion-note>
+            } @else if (form.controls.cnic.touched && form.controls.cnic.hasError('pattern')) {
+            <ion-note color="danger">Enter a valid 13-digit CNIC, with or without hyphens.</ion-note>
+            }
+          </div>
+
+          <div class="form-actions">
+            <ion-button fill="outline" type="button" class="cancel-button" (click)="closeAddModal()">
+              Cancel
+            </ion-button>
+            <ion-button type="submit" class="submit-button"> Add employee </ion-button>
+          </div>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-toast
+    [isOpen]="isToastOpen"
+    message="Employee added to your team."
+    duration="2200"
+    position="bottom"
+    (didDismiss)="isToastOpen = false"
+  ></ion-toast>
 </ion-content>

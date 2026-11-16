@@ -22,3 +22,22 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 @import "@ionic/angular/css/palettes/dark.class.css";
+
+ion-modal.employee-modal {
+  --background: var(--app-surface, #ffffff);
+  --backdrop-opacity: 0.42;
+}
+
+ion-modal.employee-modal::part(content) {
+  background: var(--app-surface, #ffffff);
+}
+
+ion-modal.employee-modal ion-header,
+ion-modal.employee-modal ion-toolbar {
+  --background: var(--app-surface, #ffffff);
+  background: var(--app-surface, #ffffff);
+}
+
+ion-modal.employee-modal ion-toolbar::part(container) {
+  background: var(--app-surface, #ffffff);
+}
