@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonIcon, IonInput, IonItem, IonLabel, IonText, IonImg } from '@ionic/angular';
 import { ThemeService } from '../../../core/theme.service';
 import { AuthService } from '../../../core/services/auth/auth-service';
@@ -28,8 +28,10 @@ import { Router } from '@angular/router';
 ],
 })
 export class LoginPage {
+  userForm!: FormGroup;
   email = '';
   password = '';
+  loading = signal(false);
   message = signal<string>('');
   notification = inject(NotificationService);
   router = inject(Router);
@@ -40,6 +42,10 @@ export class LoginPage {
 
   ngOnInit() {
     // this.LoginAccount('anwar108658@gmail.com','!@#$%^&*');
+    this.userForm = new FormGroup({
+      email: new FormControl('', { nonNullable: true }),
+      password: new FormControl('', { nonNullable: true }),
+    })
   }
 
   isDarkMode(): boolean {
@@ -51,6 +57,7 @@ export class LoginPage {
   }
 
   async LoginAccount(email:string, password:string) {
+    this.loading.set(true);
     try {
       const session = await this.authService.login({email,password});
       console.log('Login successful:', session);
@@ -59,6 +66,8 @@ export class LoginPage {
     } catch (error:any) {
         await this.notification.error(error?.message || 'Login failed');
       console.error('Login failed:', error?.message);
+    } finally {
+      this.loading.set(false);
     }
   }
 }
